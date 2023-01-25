@@ -28918,7 +28918,7 @@ aM(a){if(typeof a=="function")return a
 else return A.b76(a)},
 aJi(){var s,r=$.Ae().Jf$
 r===$&&A.b()
-r.rp$="https://pensum-production.up.railway.app/#/api"
+r.rp$="https://pensum-production.up.railway.app/"
 s=A.cR(J.b7($.wA.aO().a,"token"))
 r.sX7(0,A.an(["x-token",s==null?"":s],t.N,t.z))},
 ol(a){return A.aZM(a)},
