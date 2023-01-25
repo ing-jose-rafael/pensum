@@ -1,12 +1,13 @@
 const {Router} = require('express');
 const { check } = require('express-validator');
-const { obtenerAsignatura, obtenerAsignaturaID, crearAsignatura, actualizarAsignatura, eliminarAsignatura } = require('../controllers/asignaturas');
+const { obtenerAsignatura, obtenerAsignaturaID, crearAsignatura, actualizarAsignatura, eliminarAsignatura, crearAsignaturas } = require('../controllers/asignaturas');
 const {  existeAsignaturaPorId, existeAsignaturaPorCodigo, existeAsignaturaPorNombre } = require('../helpers/db-validators');
 const { validarCampos, validarJWT, esAdminRole } = require('../middleware');
 
 const router = Router();
 
 router.get('/',obtenerAsignatura);
+router.get('/seed',crearAsignaturas);
 router.get('/:id',[
     check('id','No es un ID válido').isMongoId(),
     validarCampos,

@@ -1,5 +1,5 @@
 const { request, response } = require("express");
-const {Asignatura} = require("../models");
+const {Asignatura, Materia} = require("../models");
 
 
 const obtenerAsignatura = async (req=request, res=response) => {
@@ -23,6 +23,20 @@ const crearAsignatura = async (req=request, res=response) => {
     await asignatura.save();
     res.status(201).json({asignatura});
 }
+
+const crearAsignaturas = async (_, res=response) => {
+    
+    const asignaturas = await Asignatura.find();
+    const curs = asignaturas.map(c => {
+        const {profesores, grupTeoriaAsig, grupPracticaAsig,_id,__v,...resto } = c.toObject();
+        const curso = new Materia(resto);
+        curso.save();
+        return curso
+    })
+    res.status(201).json(curs);
+}
+
+
 const actualizarAsignatura = async (req=request, res=response) => {
     const {id} = req.params;
     const {estado,...data} =  req.body;
@@ -58,4 +72,5 @@ module.exports = {
     crearAsignatura,
     actualizarAsignatura,
     eliminarAsignatura,
+    crearAsignaturas
 }
